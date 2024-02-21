@@ -1,10 +1,11 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 
 const CounterHook = () => {
+    const [counter, setCounter] = useState(0)
     return <div>
-        <h2>当前计数：{0}</h2>
-        <button>+1</button>
-        <button>-1</button>
+        <h2>当前计数：{counter}</h2>
+        <button onClick={e=>setCounter(100)}>+1</button>
+        <button onClick={e=>setCounter(-100)}>-1</button>
     </div>    
 }
 
