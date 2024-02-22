@@ -1,27 +1,18 @@
-import React, { PureComponent } from 'react'
+import React, { memo, useState, useEffect } from 'react'
 
-export class App extends PureComponent {
-  constructor(){
-    super()
-    this.state={
-      counter: 100
-    }
-  }
-  componentDidMount(){
-    document.title = this.state.counter
-  }
-  componentDidUpdate(){
-    document.title = this.state.counter
-  }
-  render() {
-    const {counter} = this.state
+export default memo(function App() {
+    const [count, setCount] = useState(200)
+
+
+    useEffect(()=>{
+        //当前传入的回调函数会在组件被渲染完成后，自动执行
+        document.title = count
+    })
+
     return (
-      <div>
-        <h2>计数：{counter}</h2>
-        <button onClick={e=>this.setState({counter: counter+1})}>+1</button>
-      </div>
+        <div>
+            <h2>当前计数： {count}</h2>
+            <button onClick={e => setCount(count+1)}>+1</button>
+        </div>
     )
-  }
-}
-
-export default App
+})
