@@ -1,18 +1,22 @@
-import React, { memo, useState, useEffect } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 
 export default memo(function App() {
-    const [count, setCount] = useState(200)
+    const [count, setCount] = useState(0)
+    //负责告知react，在执行完当前组件渲染之后要执行的副作用代码
+    useEffect(() => {
 
+        //1.监听事件
+        console.log('监听redux中数据变化，监听eventBus中的why事件');
 
-    useEffect(()=>{
-        //当前传入的回调函数会在组件被渲染完成后，自动执行
-        document.title = count
+        // 返回值：回调函数 => 组件被重新渲染或者组件卸载的时候执行
+        return () => {
+            console.log('取消监听redux中数据变化，取消监听eventBus中的why事件');
+        }
+
     })
-
     return (
         <div>
-            <h2>当前计数： {count}</h2>
-            <button onClick={e => setCount(count+1)}>+1</button>
+            <button onClick={e=>setCount(count+1)}>+1({count})</button>
         </div>
     )
 })
